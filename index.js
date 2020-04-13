@@ -1,4 +1,10 @@
-const refs = {};
+const refs = {
+    days: document.querySelector("span[data-value='days'"),
+    hours: document.querySelector("span[data-value = 'hours']"),
+    mins: document.querySelector("span[data-value = 'mins']"),
+    secs: document.querySelector("span[data-value = 'secs']"),
+    timer: document.querySelector("#timer-1"),
+};
 
 const timerData = {
     selector: "#timer-1",
@@ -6,11 +12,12 @@ const timerData = {
 };
 const timer = {
     start() {
-        const startTime = Date(timerData.targetDate);
+        const startTime = timerData.targetDate;
         setInterval(() => {
             const currentTime = Date.now();
             const delTime = startTime - currentTime;
-            //console.log(delTime);
+
+            updateTimer(delTime);
         }, 1000);
     },
 };
@@ -22,7 +29,8 @@ function updateTimer(time) {
     );
     const mins = pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
     const secs = pad(Math.floor((time % (1000 * 60)) / 1000));
-    console.log(`${hours}:${mins}:${secs}`);
+
+    refs.timer.textContent = `${days}:${hours}:${mins}:${secs}`;
 }
 function pad(value) {
     return String(value).padStart(2, "0");
