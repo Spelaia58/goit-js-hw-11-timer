@@ -11,7 +11,6 @@ const timerData = {
     targetDate: new Date("2020, 6,17"),
 };
 const timer = {
-    intervalId: null,
     start() {
         const startTime = timerData.targetDate;
         setInterval(() => {
@@ -21,7 +20,6 @@ const timer = {
             updateTimer(delTime);
         }, 1000);
     },
-    stop() {},
 };
 timer.start();
 function updateTimer(time) {
