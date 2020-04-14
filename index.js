@@ -8,9 +8,10 @@ const refs = {
 
 const timerData = {
     selector: "#timer-1",
-    targetDate: new Date("Jul 17, 2020"),
+    targetDate: new Date("2020, 6,17"),
 };
 const timer = {
+    intervalId: null,
     start() {
         const startTime = timerData.targetDate;
         setInterval(() => {
@@ -20,17 +21,20 @@ const timer = {
             updateTimer(delTime);
         }, 1000);
     },
+    stop() {},
 };
 timer.start();
 function updateTimer(time) {
-    const days = pad(Math.floor(time % (1000 * 60 * 60 * 24)));
+    const days = pad(Math.floor(time / (1000 * 60 * 60 * 24)));
     const hours = pad(
         Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
     );
     const mins = pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
     const secs = pad(Math.floor((time % (1000 * 60)) / 1000));
-
-    refs.timer.textContent = `${days}:${hours}:${mins}:${secs}`;
+    refs.days.textContent = `${days}`;
+    refs.hours.textContent = `${hours}`;
+    refs.mins.textContent = `${mins}`;
+    refs.secs.textContent = `${secs}`;
 }
 function pad(value) {
     return String(value).padStart(2, "0");
